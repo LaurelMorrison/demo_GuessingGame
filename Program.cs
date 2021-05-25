@@ -6,8 +6,13 @@ class Program
     {
         bool difficultyCheck = true;
         int allowedGuesses = 0;
+        int DifficultyLevel = 0;
         int guess = 0;
         int randomNumber = new Random().Next(1, 100);
+        int EasyLevel = 1;
+        int MediumLevel = 2;
+        int HardLevel = 3;
+        int CheaterLevel = 4;
 
         while (difficultyCheck)
         {
@@ -19,23 +24,23 @@ class Program
         "
             );
 
-            int DifficultyLevel = int.Parse(Console.ReadLine());
-            if (DifficultyLevel == 1)
+            DifficultyLevel = int.Parse(Console.ReadLine());
+            if (DifficultyLevel == EasyLevel)
             {
                 allowedGuesses = 8;
                 difficultyCheck = false;
             }
-            else if (DifficultyLevel == 2)
+            else if (DifficultyLevel == MediumLevel)
             {
                 allowedGuesses = 6;
                 difficultyCheck = false;
             }
-            else if (DifficultyLevel == 3)
+            else if (DifficultyLevel == HardLevel)
             {
                 allowedGuesses = 4;
                 difficultyCheck = false;
             }
-            else if (DifficultyLevel == 4)
+            else if (DifficultyLevel == CheaterLevel)
             {
                 allowedGuesses = int.MaxValue;
                 difficultyCheck = false;
@@ -64,6 +69,7 @@ class Program
             if (guess == randomNumber)
             {
                 Console.WriteLine("Your guess was correct!");
+                Console.Beep();
                 break;
             }
             if (guess > randomNumber)
@@ -79,7 +85,7 @@ class Program
                 Console.WriteLine($"The number was: {randomNumber}");
                 break;
             }
-            if (allowedGuesses <= 10)
+            if (DifficultyLevel != CheaterLevel)
             {
                 Console.Write($"You have {allowedGuesses - i} tries left. Enter another number: ");
             }
