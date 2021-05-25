@@ -15,6 +15,7 @@ class Program
         1. Easy
         2. Medium
         3. Hard
+        4. Cheater
         "
             );
 
@@ -32,6 +33,11 @@ class Program
             else if (DifficultyLevel == 3)
             {
                 allowedGuesses = 4;
+                difficultyCheck = false;
+            }
+            else if (DifficultyLevel == 4)
+            {
+                allowedGuesses = int.MaxValue;
                 difficultyCheck = false;
             }
             else
@@ -73,7 +79,11 @@ class Program
                 Console.WriteLine($"The number was: {randomNumber}");
                 break;
             }
-            Console.Write($"You have {allowedGuesses - i} tries left. Enter another number: ");
+            if (allowedGuesses <= 10)
+            {
+                Console.Write($"You have {allowedGuesses - i} tries left. Enter another number: ");
+            }
+
         }
     }
 }
