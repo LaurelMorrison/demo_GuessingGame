@@ -1,15 +1,49 @@
 ﻿using System;
 
-System.Console.Write("Guess a secret number");
+GuessingGame();
 
-string number = System.Console.ReadLine();
-string secretNumber = "42";
-
-if (number == secretNumber)
+static int GuessingGame()
 {
-    System.Console.WriteLine("That's it! Congrats!");
+    System.Console.Write("Guess a secret number between 1-100");
+    int guess = 0;
+
+    try
+    {
+        guess = int.Parse(Console.ReadLine());
+    }
+    catch (Exception)
+    {
+        Console.WriteLine("Invalid guess");
+        guess = GuessingGame();
+    }
+    return guess;
 }
-else
+
+int allowedGuesses = 3;
+int numGuesses = 0;
+int randomNumber = new Random().Next(1, 100);
+
+while (true)
 {
-    System.Console.WriteLine($"Your guess of {number} is incorrect. Guess again.");
+    int guess = GuessingGame();
+    numGuesses++;
+    if (guess == randomNumber)
+    {
+        Console.WriteLine("Your guess was correct!");
+        break;
+    }
+    if (guess > randomNumber)
+    {
+        Console.WriteLine("Your guess was too high");
+    }
+    if (guess < randomNumber)
+    {
+        Console.WriteLine("Your guess was too low");
+    }
+    if (allowedGuesses == numGuesses)
+    {
+        Console.WriteLine($"The number was: {randomNumber}");
+        break;
+    }
+    Console.Write($"You have {allowedGuesses - numGuesses} tries left. Enter another number: ");
 }
